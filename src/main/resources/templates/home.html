@@ -36,14 +36,13 @@
                     <div class="poster-list-item-img">
                         <img th:src="@{'/assets/images/uploads/' + ${el.poster_film}}" alt="" class="poster-item-img">
                     </div>
-                    <!--                    <span class="ageLimit"><?=$item['name_ageLimit']?></span>-->
+                    <span th:text="${el.age.age}" class="ageLimit"></span>
                     <div class="poster-after-hover">
                         <div class="poster-after-hover-text">
-                            <!--                            <div class="poster-genre"><?=$item['name_genre']?></div>-->
+                            <div th:text="${el.genre.genreName}" class="poster-genre"></div>
                             <div th:text="${el.name}" class="poster-name"></div>
                             <div th:text="${el.duration} + ' мин.'" class="poster-name"></div>
                         </div>
-                        <!--                        <span class="ageLimit"><?=$item['name_ageLimit']?></span>-->
                     </div>
                 </div>
             </a>

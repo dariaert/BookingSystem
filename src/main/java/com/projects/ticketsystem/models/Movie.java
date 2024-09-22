@@ -18,6 +18,14 @@ public class Movie {
     @Column(name = "duration_film")
     private int duration;
 
+    @ManyToOne
+    @JoinColumn(name = "id_genre")
+    private Genre genre;
+
+    @ManyToOne
+    @JoinColumn(name = "id_ageLimit")
+    private Age age;
+
     public Long getId() {
         return id;
     }
@@ -80,5 +88,21 @@ public class Movie {
 
     public void setPoster_film(String poster_film) {
         this.poster_film = poster_film;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Age getAge() {
+        return age;
+    }
+
+    public void setAge(Age age) {
+        this.age = age;
     }
 }
