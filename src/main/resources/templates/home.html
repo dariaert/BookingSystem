@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+<header th:insert="components/header :: header"></header>
+
+<main class="main">
+    <div class="slider">
+        <div class="slides">
+            <img class="servers_image" src="/assets/images/Slide1.svg" alt="">
+            <img class="servers_image" src="/assets/images/Slide2.svg" alt="">
+            <img class="servers_image" src="/assets/images/Slide3.svg" alt="">
+            <img class="servers_image" src="/assets/images/Slide4.svg" alt="">
+            <img class="servers_image" src="/assets/images/Slide1.svg" alt="">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="poster-title">
+            <h1>Афиша</h1>
+        </div>
+
+        <div class="poster_list">
+            <a th:each="el : ${movies}" th:href="'/about/' + ${el.id}">
+                <div class="poster-list-item">
+                    <div class="poster-list-item-img">
+                        <img th:src="@{'/assets/images/uploads/' + ${el.poster_film}}" alt="" class="poster-item-img">
+                    </div>
+                    <!--                    <span class="ageLimit"><?=$item['name_ageLimit']?></span>-->
+                    <div class="poster-after-hover">
+                        <div class="poster-after-hover-text">
+                            <!--                            <div class="poster-genre"><?=$item['name_genre']?></div>-->
+                            <div th:text="${el.name}" class="poster-name"></div>
+                            <div th:text="${el.duration} + ' мин.'" class="poster-name"></div>
+                        </div>
+                        <!--                        <span class="ageLimit"><?=$item['name_ageLimit']?></span>-->
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer th:insert="components/footer :: footer"></footer>
+
+</div>
+
+</body>
+</html>
