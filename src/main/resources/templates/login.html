@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="components/header :: header"></header>
+
+    <main class="main">
+        <div class="container">
+            <div class="form-centre">
+                <div class="login-form">
+                    <h1 class="form_title">Вход</h1>
+
+                    <form action="/login" method="post" class="register_form">
+                        <input type="email"
+                               name="username"
+                               class="custom-input"
+                               placeholder="E-mail"
+                        required
+                        > <br>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="custom-input"
+                               placeholder="******"
+                               required
+                        > <br>
+                        <button
+                                type="submit"
+                                class="btn"
+                        >
+                            Войти
+                        </button>
+                    </form>
+                    <div class="register-link">
+                        <a href="/registration">Зарегистрироваться</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:insert="components/footer :: footer"></footer>
+
+</div>
+
+</body>
+</html>

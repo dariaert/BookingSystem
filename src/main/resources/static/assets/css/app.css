@@ -314,11 +314,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     margin: 10px 10px;
 }
 
-.poster-list-item:hover .ageLimit {
-    color: #C31D41;
-    border: 1px solid #C31D41;
-}
-
 .poster-after-hover{
     position: absolute;
     z-index: 2;
