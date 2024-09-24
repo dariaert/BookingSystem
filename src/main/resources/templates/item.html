@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="components/header :: header"></header>
+
+    <main class="main">
+        <div class="container">
+
+            <section th:each="el : ${movie}" class="about_film">
+                <div class="about_film-container">
+                    <div class="poster-about_film-container">
+                        <div class="poster-about_film">
+                            <img th:src="@{'/assets/images/uploads/' + ${el.poster_film}}" alt="" class="poster_about_film-img">
+                        </div>
+                        <span th:text="${el.age.age}" class="about_film-ageLimit"></span>
+                    </div>
+                    <div class="about_film-text">
+                        <div class="about_film-name-film">
+                            <h1 th:text="${el.name}"></h1>
+                        </div>
+
+                        <div class="about_film-block-criteria">
+                            <div class="about_film-criteria">Жанр:</div>
+                            <div th:text="${el.genre.genreName}" class="about_film-info"></div>
+                        </div>
+
+                        <div class="about_film-block-criteria">
+                            <div class="about_film-criteria">Режиссер:</div>
+                            <div th:text="${el.filmmaker}" class="about_film-info"></div>
+                        </div>
+
+                        <div class="about_film-block-criteria">
+                            <div class="about_film-criteria">В ролях:</div>
+                            <div th:text="${el.actors}" class="about_film-info"></div>
+                        </div>
+
+                        <div class="about_film-block-criteria">
+                            <div class="about_film-criteria">Страна:</div>
+                            <div th:text="${el.country}" class="about_film-info"></div>
+                        </div>
+
+                        <div class="about_film-block-criteria">
+                            <div class="about_film-criteria">Продолжительность:</div>
+                            <div th:text="${el.duration} + ' мин.'" class="about_film-info"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="about_film-description">
+                    <div class="about_film-description">
+                        <h1>Описание</h1>
+                    </div>
+                    <div th:text="${el.description}" class="about_film-info"><p></p></div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer th:insert="components/footer :: footer"></footer>
+
+</div>
+
+</body>
+</html>

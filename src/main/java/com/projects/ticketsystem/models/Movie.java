@@ -26,6 +26,20 @@ public class Movie {
     @JoinColumn(name = "id_ageLimit")
     private Age age;
 
+    public Movie(String name, String description, String actors, String filmmaker, String country, String poster_film, int duration, Genre genre, Age age) {
+        this.name = name;
+        this.description = description;
+        this.actors = actors;
+        this.filmmaker = filmmaker;
+        this.country = country;
+        this.poster_film = poster_film;
+        this.duration = duration;
+        this.genre = genre;
+        this.age = age;
+    }
+
+    public Movie() {}
+
     public Long getId() {
         return id;
     }

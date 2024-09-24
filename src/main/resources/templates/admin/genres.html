@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="components/header :: header"></header>
+
+    <main class="main">
+        <div class="container">
+            <div class="button-panel-list">
+                <div class="button-panel-list-item">
+                    <a href="/admin/movies">
+                        <button class="btn-admin-panel">
+                            <h4>Фильмы</h4>
+                        </button>
+                    </a>
+                </div>
+                <div class="button-panel-list-item">
+                    <a href="/admin/shows">
+                        <button class="btn-admin-panel">
+                            <h4>Сеансы</h4>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <section class="all-genres" style="margin: 50px 0 50px;">
+                <h2>Жанры</h2>
+                <div th:each="genre : ${genres}" class="genre-content-list">
+                    <div class="genre-content-list-item">
+                        <h3 th:text="${genre.genreName}"></h3>
+                    </div>
+                    <div class="genre-content-list-item">
+                        <div class="panel-icon">
+                            <a th:href="'/redact/genre/' + ${genre.id}">
+                                <img src="/assets/icons/Edit.svg" alt="">
+                            </a>
+                        </div>
+                        <div class="panel-icon">
+                            <form th:action="'/remove/genre/' + ${genre.id}" method="post">
+                                <button type="submit" class="btn-icon">
+                                    <img src="/assets/icons/Delete.svg" alt="">
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="redact_genre-film" style="margin-bottom: 50px;">
+                <div class="redact_genre-block">
+                    <h1>Добавление жанра</h1>
+                    <form action="/genre/add" method="post" class="redact-show-form">
+                        <input id="genre" name="name_genre" type="text" class="redact-input-genre" placeholder="Название" required>
+                        <button class="btn-admin-panel">
+                            <div class="admin-panel-text">
+                                <div class="panel-icon">
+                                    <img src="/assets/icons/Plus.svg" alt="">
+                                </div>
+                                <h4>Добавить</h4>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer th:insert="components/footer :: footer"></footer>
+
+</div>
+
+</body>
+</html>

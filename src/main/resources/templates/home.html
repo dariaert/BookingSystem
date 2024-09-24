@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/app.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body>
 
@@ -31,7 +31,7 @@
         </div>
 
         <div class="poster_list">
-            <a th:each="el : ${movies}" th:href="'/about/' + ${el.id}">
+            <a th:each="el : ${movies}" th:href="'/movie/' + ${el.id}">
                 <div class="poster-list-item">
                     <div class="poster-list-item-img">
                         <img th:src="@{'/assets/images/uploads/' + ${el.poster_film}}" alt="" class="poster-item-img">

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="components/header :: header"></header>
+
+    <main class="main">
+
+        <div class="container">
+
+            <section th:each="show : ${shows}" class="redact_show-film">
+                <div class="container">
+                    <h1 style="margin-top: 50px;">Обновление сеанса</h1> <hr>
+                    <form method="post" class="redact-show-form">
+                        <input type="hidden" name="id" th:value="${show.id}">
+                        <input id="date" name="date" type="date" class="redact-input" th:value="${show.date}" required>
+                        <input id="time" name="time" type="time" class="redact-input" th:value="${show.time}" required>
+                        <input id="cost" name="cost" type="text" class="redact-input-cost" placeholder="Цена" th:value="${show.cost}" required>
+                        <select name="movieId" id="movieId" class="redact-input-genre">
+                            <option th:each="movie : ${movies}"
+                                    th:value="${movie.id}"
+                                    th:text="${movie.name}"
+                                    th:selected="${movie.id} == ${show.movie.id}">
+                            </option>
+                        </select>
+                        <button class="btn-admin-panel" type="submit">
+                            <div class="admin-panel-text">
+                                <div class="panel-icon">
+                                    <img src="/assets/icons/Edit.svg" alt="">
+                                </div>
+                                <h4>Обновить</h4>
+                            </div>
+                        </button>
+                    </form>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer th:insert="components/footer :: footer"></footer>
+
+</div>
+
+</body>
+</html>
