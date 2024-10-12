@@ -1,17 +1,16 @@
 <div th:fragment="header">
-
     <header class="header">
         <div class="container">
             <div class="header__line">
                 <div class="header-menu-left">
                     <div class="header__logo">
-                        <a href="/" class="menu__list-link header-animation-line"><h1>ЛОГО</h1></a>
+                        <a th:href="@{/}" class="menu__list-link header-animation-line"><h1>ЛОГО</h1></a>
                     </div>
                 </div>
                 <nav class="menu">
                     <ul class="menu__list">
                         <li class="menu__list-item">
-                            <a href="/admin/movies" class="menu__list-link header-animation-line">Панель</a>
+                            <a th:href="@{/admin/movies}" class="menu__list-link header-animation-line">Панель</a>
                         </li>
                         <li class="menu__list-item">
                             <a href="#" class="menu__list-link header-animation-line">Расписание</a>
@@ -26,7 +25,7 @@
                             <div class="entrance-icon">
                                 <img src="/assets/icons/header_entrance.svg" alt="">
                             </div>
-                            <a href="/login" class="menu__list-link header-animation-line">Вход</a>
+                            <a th:href="@{/login}" class="menu__list-link header-animation-line">Вход</a>
                         </li>
                         <li class="menu__list-item header_icon">
                             <div class="user-icon">
@@ -34,17 +33,20 @@
                             </div>
                             <a href="#" class="menu__list-link header-animation-line">Профиль</a>
                         </li>
-                        <li class="menu__list-item header_icon">
-                            <form action="/logout" method="post">
-                                <button type="submit" class="header_icon header-animation-line logout-btn">
-                                    <div class="entrance-icon">
-                                        <img src="/assets/icons/header_entrance.svg" alt="">
-                                    </div>
-                                    <h4 class="menu__list-link header-animation-line">Выход</h4>
-                                </button>
-                            </form>
+                        <!-- Проверка, авторизован ли пользователь -->
+                        <div>
+                            <li class="menu__list-item header_icon">
+                                <form th:action="@{/logout}" method="post">
+                                    <button type="submit" class="header_icon header-animation-line logout-btn">
+                                        <div class="entrance-icon">
+                                            <img src="/assets/icons/header_entrance.svg" alt="">
+                                        </div>
+                                        <h4 class="menu__list-link header-animation-line">Выход</h4>
+                                    </button>
+                                </form>
+                            </li>
+                        </div>
 
-                        </li>
                     </ul>
                 </nav>
             </div>

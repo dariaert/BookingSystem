@@ -19,8 +19,7 @@
             <div class="form-centre">
                 <div class="login-form">
                     <h1 class="form_title">Вход</h1>
-
-                    <form action="/login" method="post" class="register_form">
+                    <form th:action="@{/login}" method="post" class="register_form">
                         <input type="email"
                                name="username"
                                class="custom-input"
@@ -42,7 +41,17 @@
                         </button>
                     </form>
                     <div class="register-link">
-                        <a href="/registration">Зарегистрироваться</a>
+                        <a th:href="@{/registration}">Зарегистрироваться</a>
+                    </div>
+
+                    <!-- Сообщение об ошибке -->
+                    <div th:if="${param.error}">
+                        <p style="color: red;">Invalid email or password.</p>
+                    </div>
+
+                    <!-- Сообщение об успешном выходе -->
+                    <div th:if="${param.logout}">
+                        <p style="color: green;">You have been logged out successfully.</p>
                     </div>
 
                 </div>

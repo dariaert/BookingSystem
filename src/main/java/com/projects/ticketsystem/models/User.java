@@ -16,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // разбить на отдельные поля
     @Column(name = "FIO")
     private String FIO;
     @Column(name = "email", unique = true)

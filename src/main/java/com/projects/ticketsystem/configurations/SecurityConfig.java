@@ -15,39 +15,38 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new MyUserDetailsServices();
-    }
+    private final MyUserDetailsServices myUserDetailsService;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/**", "/movie/**", "/registration").permitAll()
-                        .requestMatchers("/static/**", "/images/**", "/assets/**").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
-                ).build();
-
-    }
-
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
+    public SecurityConfig(MyUserDetailsServices myUserDetailsService) {
+        this.myUserDetailsService = myUserDetailsService;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests((requests) -> requests
+                    .requestMatchers("/**", "/movie/**", "/registration", "/login").permitAll()
+                    .requestMatchers("/static/**", "/images/**", "/assets/**").permitAll()
+                    .anyRequest().authenticated())
+            .formLogin((form) -> form
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
+                    .permitAll()
+            )
+            .logout((logout) -> logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login?logout")
+                    .permitAll()
+            );
+
+        return http.build();
     }
 
 }
