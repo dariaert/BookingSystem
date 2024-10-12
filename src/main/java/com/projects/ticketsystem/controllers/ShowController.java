@@ -1,7 +1,5 @@
 package com.projects.ticketsystem.controllers;
 
-import com.projects.ticketsystem.models.Age;
-import com.projects.ticketsystem.models.Genre;
 import com.projects.ticketsystem.models.Movie;
 import com.projects.ticketsystem.models.Show;
 import com.projects.ticketsystem.repositories.MovieRepository;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;

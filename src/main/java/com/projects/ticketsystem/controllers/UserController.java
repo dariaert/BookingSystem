@@ -2,24 +2,21 @@ package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.User;
 import com.projects.ticketsystem.repositories.UserRepository;
+import com.projects.ticketsystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
-    @Autowired
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/registration")
@@ -33,9 +30,8 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public String registration(User user) {
+        userService.save(user);
         return "redirect:/login";
     }
 
