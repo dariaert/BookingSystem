@@ -6,6 +6,7 @@ import com.projects.ticketsystem.models.Movie;
 import com.projects.ticketsystem.repositories.AgeRepository;
 import com.projects.ticketsystem.repositories.GenreRepository;
 import com.projects.ticketsystem.repositories.MovieRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,19 +25,15 @@ import java.util.Optional;
 import java.util.Random;
 
 @Controller
+@RequiredArgsConstructor
 public class MovieController {
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    @Autowired
-    private MovieRepository movieRepository;
-
-    @Autowired
-    private GenreRepository genreRepository;
-
-    @Autowired
-    private AgeRepository ageRepository;
+    private final MovieRepository movieRepository;
+    private final GenreRepository genreRepository;
+    private final AgeRepository ageRepository;
 
     @GetMapping("/redact/movie/{id}")
     public String movieDetails(@PathVariable(value = "id") long movieId, Model model) {

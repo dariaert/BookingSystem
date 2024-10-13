@@ -2,6 +2,7 @@ package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.Movie;
 import com.projects.ticketsystem.repositories.MovieRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
-    @Autowired
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -32,7 +33,5 @@ public class HomeController {
         model.addAttribute("movie", arrayList);
         return "item";
     }
-
-
 
 }

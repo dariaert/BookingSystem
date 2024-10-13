@@ -2,6 +2,7 @@ package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.Genre;
 import com.projects.ticketsystem.repositories.GenreRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class GenreController {
 
-    @Autowired
-    private GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
     @GetMapping("/admin/genres")
     public String adminGenres(Model model) {
