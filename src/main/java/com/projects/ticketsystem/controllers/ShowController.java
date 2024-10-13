@@ -4,6 +4,7 @@ import com.projects.ticketsystem.models.Movie;
 import com.projects.ticketsystem.models.Show;
 import com.projects.ticketsystem.repositories.MovieRepository;
 import com.projects.ticketsystem.repositories.ShowRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -13,22 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Random;
 
 @Controller
+@RequiredArgsConstructor
 public class ShowController {
 
-    @Autowired
-    private ShowRepository showRepository;
-
-    @Autowired
-    private MovieRepository movieRepository;
+    private final ShowRepository showRepository;
+    private final MovieRepository movieRepository;
 
     @GetMapping("/admin/shows")
     public String adminShows(Model model) {

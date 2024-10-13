@@ -3,12 +3,8 @@ package com.projects.ticketsystem.configurations;
 import com.projects.ticketsystem.services.MyUserDetailsServices;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,12 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    private final MyUserDetailsServices myUserDetailsService;
-
-    public SecurityConfig(MyUserDetailsServices myUserDetailsService) {
-        this.myUserDetailsService = myUserDetailsService;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -32,7 +22,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers("/**", "/movie/**", "/registration", "/login").permitAll()
+                    .requestMatchers( "/", "/movie/**", "/registration", "/login").permitAll()
                     .requestMatchers("/static/**", "/images/**", "/assets/**").permitAll()
                     .anyRequest().authenticated())
             .formLogin((form) -> form
