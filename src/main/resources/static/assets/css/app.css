@@ -8,7 +8,6 @@ html{
 }
 html,
 body{
-    height: 100%;
     background-color: #1C1C1A;
 }
 ul{
@@ -28,8 +27,18 @@ a{
     margin: 0 auto;
     padding: 0 10px;
 }
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Regular.ttf') format('ttf'),
+    url('../fonts/Montserrat-Bold.ttf') format('ttf'),
+    url('../fonts/Montserrat-Medium.ttf') format('ttf'),
+    url('../fonts/Montserrat-SemiBold.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
-    font-family: "Montserrat Alternates", sans-serif;
+    min-height: 100%;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.8);
@@ -40,7 +49,7 @@ h1{
 }
 h2{
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 500;
 }
 h3{
     font-size: 22px;
@@ -78,8 +87,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .header__line{
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,34 +106,36 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display: flex;
     gap: 100px;
 }
-.menu__list-link{
-    font-weight: 600;
+.menu__list-link {
+    font-weight: 500;
     align-items: center;
+    position: relative;
 }
-.header-animation-line{
-    background:
-            linear-gradient(currentColor 0 0)
-            bottom /var(--d, 0) 2px
-            no-repeat;
-    transition:0.5s;
+.header-animation-line::after {
+    content: "";
+    position: absolute;
+    left: 50%; /* Начало линии в центре */
+    bottom: -8px; /* Отступ от текста */
+    height: 2px; /* Толщина линии */
+    background-color: currentColor;
+    width: 0;
+    transform: translateX(-50%); /* Центруем линию */
+    transition: width 0.5s;
 }
-.header-animation-line:hover {
-    --d: 50px;
+.header-animation-line:hover::after {
+    width: 100%; /* Линия расширяется влево и вправо */
 }
 .header_icon{
-    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 5px;
 }
-
 .logout-btn{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: none;
     padding: 0;
     text-align: center;
     font-size: 16px;
-    font-weight: 400;
     color: rgba(255, 255, 255, 0.8);
     border: none;
 }
@@ -134,13 +145,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 .footer_line-top{
     padding-top: 40px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-.footer__menu-list{
-    display: flex;
-    gap: 100px;
     align-items: center;
 }
 .app{
@@ -148,11 +155,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     justify-content: flex-end;
     gap: 50px;
     align-items: center;
-}
-.footer_line-bottom{
-    text-align: left;
-    margin-top: 25px;
-    padding-bottom: 40px;
 }
 .footer__logo h4{
     margin-top: 20px;
@@ -223,7 +225,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .slider {
-    height: 512px;
+    height: auto;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -232,12 +234,12 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .slides {
     display: flex;
-    animation: slideAnimation 12s linear infinite;
+    animation: slideAnimation 8s linear infinite;
 }
 
 .slides img {
     width: 100%;
-    height: auto;
+    height: 100%;
     flex-shrink: 0;
 }
 
@@ -245,35 +247,32 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     0% {
         transform: translateX(0);
     }
-    17% {
+    25% {
         transform: translateX(0);
     }
-    25% {
-        transform: translateX(-100%);
-    }
-    42% {
+    33.33% {
         transform: translateX(-100%);
     }
     50% {
-        transform: translateX(-200%);
+        transform: translateX(-100%);
     }
-    67% {
+    58.33% {
         transform: translateX(-200%);
     }
     75% {
-        transform: translateX(-300%);
+        transform: translateX(-200%);
     }
-    92% {
+    83.33% {
         transform: translateX(-300%);
     }
     100% {
-        transform: translateX(-400%);
+        transform: translateX(-300%);
     }
 }
 
 .poster-title{
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 
 .poster_list{
@@ -415,16 +414,14 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 
 .btn-admin-panel{
-    font-family: "Montserrat Alternates", sans-serif;
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.80);
     color: rgba(255, 255, 255, 0.80);
     border-radius: 15px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 15px;
     width: 140px;
 }
-
 
 .admin-panel-text{
     display: flex;
@@ -607,6 +604,11 @@ textarea::-webkit-scrollbar-thumb {
     margin: 50px 0 50px;
 }
 
+.checked-btn-panel{
+    color: #C31D41;
+    border: 1px solid #C31D41;
+}
+
 .add_show-film{
     margin-bottom: 50px;
 }
@@ -617,55 +619,6 @@ textarea::-webkit-scrollbar-thumb {
 
 .redact_film{
     margin-top: 50px;
-}
-
-.favourite_list{
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 80px;
-}
-
-.favourite-list-item{
-    position: relative;
-    display: flex;
-    width: 620px;
-    height: 355px;
-    margin-bottom: 50px;
-    gap: 20px;
-}
-
-.favourite-list-item-img{
-    position: relative;
-    display: inline-block;
-    border-radius: 15px;
-
-}
-.favourite-item-img{
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.75);
-    width: 238px;
-    height: 355px;
-    border-radius: 15px;
-    z-index: 1;
-}
-.ageLimit-favourite{
-    position: absolute;
-    border-radius: 15px;
-    background-color: rgba(0, 0, 0, 0.40);
-    color: white;
-    border: 1px solid white;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 9px 11px 9px 11px;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    margin: 10px 10px;
-}
-
-.about_favourite_film-block-criteria{
-    display: flex;
-    gap: 30px;
-    margin-top: 30px;
 }
 
 .container-text{
@@ -756,7 +709,9 @@ textarea::-webkit-scrollbar-thumb {
     border: 1px solid #C31D41;
     border-radius: 15px;
 }
-
+input[type="radio"]:checked + label + .tab-content {
+    display: block;
+}
 .tab-content {
     display: none;
     width: 100%;

@@ -5,14 +5,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "genre")
+@Table(name = "genre_table")
 public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "genre_id")
     private Long id;
 
-    @Column(name = "name_genre")
+    @Column(name = "genre_name")
     private String genreName;
 
     public Genre(String genreName) {

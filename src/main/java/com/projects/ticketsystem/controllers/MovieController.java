@@ -7,7 +7,6 @@ import com.projects.ticketsystem.repositories.AgeRepository;
 import com.projects.ticketsystem.repositories.GenreRepository;
 import com.projects.ticketsystem.repositories.MovieRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -49,7 +48,7 @@ public class MovieController {
     }
 
     @PostMapping("/redact/movie/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String adminMovieRedact(@PathVariable(value = "id") long movieId,
                                    @RequestParam("name_film") String nameFilm,
                                    @RequestParam("genreId") Long genreId, // Получаем id жанра
@@ -159,6 +158,7 @@ public class MovieController {
                 return "add-film-form";
             }
         }
+
 
         Movie movie = new Movie(nameFilm, description, actors, filmmaker, country, resultFilename, duration, genre, age);
         movieRepository.save(movie);
