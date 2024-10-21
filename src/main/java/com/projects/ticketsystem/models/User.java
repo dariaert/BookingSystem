@@ -4,24 +4,26 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_account")
 @Data
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     // разбить на отдельные поля
-    @Column(name = "FIO")
+    @Column(name = "user_name")
     private String FIO;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "user_email", unique = true)
     private String email;
 
-    @Column(name = "password", length = 1000)
+    @Column(name = "user_password", length = 1000)
     private String password;
 
+    @Column(name = "user_role")
     private String role;
 
 }

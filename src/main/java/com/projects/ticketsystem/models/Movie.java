@@ -2,30 +2,46 @@ package com.projects.ticketsystem.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
-@Table(name = "film")
+@Table(name = "movie_table")
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_film")
+    @Column(name = "movie_id")
     private Long id;
 
-    @Column(name = "name_film")
+    @Column(name = "movie_name")
     private String name;
-    private String description, actors, filmmaker, country, poster_film;
 
-    @Column(name = "duration_film")
+    @Column(name = "movie_description")
+    private String description;
+
+    @Column(name = "movie_actors")
+    private String actors;
+
+    @Column(name = "movie_filmmaker")
+    private String filmmaker;
+
+    @Column(name = "movie_country")
+    private String country;
+
+    @Column(name = "movie_poster")
+    private String poster_film;
+
+    @Column(name = "movie_duration")
     private int duration;
 
     @ManyToOne
-    @JoinColumn(name = "id_genre")
+    @JoinColumn(name = "movie_genre_id")
     private Genre genre;
 
     @ManyToOne
-    @JoinColumn(name = "id_ageLimit")
+    @JoinColumn(name = "movie_age_id")
     private Age age;
 
     public Movie(String name, String description, String actors, String filmmaker, String country, String poster_film, int duration, Genre genre, Age age) {
@@ -40,5 +56,4 @@ public class Movie {
         this.age = age;
     }
 
-    public Movie() {}
 }

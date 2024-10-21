@@ -1,25 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Ticket System</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/app.css">
-</head>
+<head th:insert="components/head :: head"></head>
 <body>
-
 <div class="wrapper">
-
     <header th:insert="components/header :: header"></header>
-
     <main class="main">
         <div class="container">
             <section th:each="movie : ${movies}" class="redact_film">
                 <div class="container">
                     <h1>Обновление фильма</h1> <hr>
-                    <form method="post" class="redact-film-form" enctype="multipart/form-data">
+                    <form th:action="'/redact/movie/' + ${movie.id}" method="post" class="redact-film-form" enctype="multipart/form-data">
                         <div class="redact-film-form-block">
                             <div class="redact-film-form-block-item">
                                 <input type="hidden" name="id" th:value="${movie.id}">
@@ -32,11 +22,9 @@
                                     </option>
                                 </select>
                             </div>
-
                             <div class="redact-film-form-block-item">
                                 <input style="width: 100%;" id="actors" name="actors" th:value="${movie.actors}" type="text" class="redact-input-genre" placeholder="Актеры">
                             </div>
-
                             <div class="redact-film-form-block-item">
                                 <input id="duration" name="duration" th:value="${movie.duration}" type="text" class="redact-input-genre" placeholder="Продолжительность, мин" required>
                                 <select name="ageId" id="ageId" class="redact-input-genre">
@@ -47,15 +35,12 @@
                                     </option>
                                 </select>
                             </div>
-
                             <div class="redact-film-form-block-item">
                                 <input id="filmmaker" name="filmmaker" th:value="${movie.filmmaker}" type="text" class="redact-input-genre" placeholder="Режиссер" required>
                                 <input id="country" name="country" th:value="${movie.country}" type="text" class="redact-input-genre" placeholder="Страна" required>
                             </div>
-
                             <input style="margin-top: 30px;" id="poster" name="poster" type="file" class="">
                         </div>
-
                         <div class="redact-film-form-block" style="margin-left: 20px">
                             <textarea style="width: 100%;" id="description" name="description" th:text="${movie.description}" class="custom-textarea" placeholder="Описание" required></textarea> <br>
                             <button class="btn-admin-panel" type="submit" style="margin-top: 30px; position: absolute; right: 0;">
@@ -67,19 +52,11 @@
                                 </div>
                             </button>
                         </div>
-
                     </form>
-
                 </div>
             </section>
-
         </div>
-
     </main>
-
-    <footer th:insert="components/footer :: footer"></footer>
-
 </div>
-
 </body>
 </html>

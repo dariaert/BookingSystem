@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Ticket System</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/app.css">
-</head>
+<head th:insert="components/head :: head"></head>
 <body>
 
 <div class="wrapper">
@@ -17,11 +10,10 @@
 <main class="main">
     <div class="slider">
         <div class="slides">
-            <img class="servers_image" src="/assets/images/Slide1.svg" alt="">
-            <img class="servers_image" src="/assets/images/Slide2.svg" alt="">
-            <img class="servers_image" src="/assets/images/Slide3.svg" alt="">
-            <img class="servers_image" src="/assets/images/Slide4.svg" alt="">
-            <img class="servers_image" src="/assets/images/Slide1.svg" alt="">
+            <img class="servers_image" src="/assets/images/Slide2.jpg" alt="">
+            <img class="servers_image" src="/assets/images/Slide3.jpg" alt="">
+            <img class="servers_image" src="/assets/images/Slide4.jpg" alt="">
+            <img class="servers_image" src="/assets/images/Slide2.jpg" alt="">
         </div>
     </div>
 
@@ -54,6 +46,5 @@
 <footer th:insert="components/footer :: footer"></footer>
 
 </div>
-
 </body>
 </html>
