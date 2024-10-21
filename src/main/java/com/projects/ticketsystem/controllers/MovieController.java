@@ -163,6 +163,16 @@ public class MovieController {
         Movie movie = new Movie(nameFilm, description, actors, filmmaker, country, resultFilename, duration, genre, age);
         movieRepository.save(movie);
 
+//        Movie movie = new  Movie();
+//        movie.setName(nameFilm);
+//        movie.setGenre(genre);
+//        movie.setAge(age);
+//        movie.setFilmmaker(filmmaker);
+//        movie.setCountry(country);
+//        movie.setDescription(description);
+//
+//        movieRepository.save(movie);
+
         return "redirect:/admin/movies";
     }
 
