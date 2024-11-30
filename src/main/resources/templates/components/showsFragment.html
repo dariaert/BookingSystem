@@ -1,0 +1,38 @@
+<div th:fragment="showsFragment">
+    <p th:if="${showsGroupedByMovie.isEmpty()}" th:text="'Сеансов нет на выбранную дату.'"></p>
+    <div th:each="entry : ${showsGroupedByMovie}" style="margin-bottom: 60px;">
+        <div class="about_film-container">
+            <!-- Информация о фильме -->
+            <div class="poster-content-schedule-container">
+                <div class="poster-content-schedule">
+                    <img th:src="@{'/assets/images/uploads/' + ${entry.key.poster_film}}" alt="" class="poster_content-schedule-img">
+                </div>
+                <span class="about_film-ageLimit" th:text="${entry.key.age.age}"></span>
+            </div>
+            <div class="about_film-text">
+                <div class="about_film-name-film">
+                    <h1 th:text="${entry.key.name}"></h1>
+                </div>
+                <div class="about_film-block-criteria">
+                    <div class="about_film-criteria">Жанр:</div>
+                    <div class="about_film-info" th:text="${entry.key.genre.genreName}"></div>
+                </div>
+                <div class="about_film-block-criteria">
+                    <div class="about_film-criteria">Продолжительность:</div>
+                    <div class="about_film-info" th:text="${entry.key.duration} + ' мин.'"></div>
+                </div>
+                <!-- Время сеансов -->
+                <div class="schedule-time-list">
+                    <div th:each="show : ${entry.value}">
+                        <div class="schedule-time-list_item">
+                            <a th:href="@{/reservation(showId=${show.id})}" class="btn-time">
+                                <h4 th:text="${show.time}"></h4>
+                                <h4 class="text-schedule-time" th:text="${show.cost + '₽'}"></h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

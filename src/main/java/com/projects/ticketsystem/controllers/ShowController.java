@@ -5,7 +5,6 @@ import com.projects.ticketsystem.models.Show;
 import com.projects.ticketsystem.repositories.MovieRepository;
 import com.projects.ticketsystem.repositories.ShowRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
