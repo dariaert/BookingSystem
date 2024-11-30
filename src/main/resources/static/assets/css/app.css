@@ -8,6 +8,7 @@ html{
 }
 html,
 body{
+    height: 100%;
     background-color: #1C1C1A;
 }
 ul{
@@ -192,7 +193,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .btn{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: #C31D41;
     border-radius: 15px;
     padding: 15px;
@@ -206,7 +207,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     border: none;
 }
 .custom-input{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     border: 1px solid #ffffff;
     background: none;
     border-radius: 15px;
@@ -446,7 +447,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .redact-input{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     border: 1px solid #ffffff;
     background: none;
     border-radius: 15px;
@@ -459,7 +460,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .redact-input-cost{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     border: 1px solid #ffffff;
     background: none;
     border-radius: 15px;
@@ -472,7 +473,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .redact-input-genre{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     border: 1px solid #ffffff;
     background: none;
     border-radius: 15px;
@@ -489,7 +490,7 @@ select option{
 }
 
 .custom-select-film{
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     border: 1px solid #ffffff;
     background: none;
     border-radius: 15px;
@@ -521,7 +522,7 @@ textarea{
     border: 1px solid #ffffff;
     outline: none;
     resize: none;
-    font-family: "Montserrat Alternates", sans-serif; /* Устанавливаем шрифт */
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     padding: 10px;
     background: none;
@@ -652,7 +653,11 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .btn-time{
-    font-family: "Montserrat Alternates", sans-serif;
+    display: flex; /* Включаем flexbox */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    align-items: center; /* Выравнивание по горизонтали */
+    justify-content: center; /* Выравнивание по вертикали */
+    font-family: "Montserrat", sans-serif;
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.80);
     color: rgba(255, 255, 255, 0.80);
@@ -661,11 +666,13 @@ textarea::-webkit-scrollbar-thumb {
     height: 58px;
     width: 106px;
     text-align: center;
+    text-decoration: none; /* Убираем подчеркивание для ссылок */
 }
 
 .text-schedule-time{
     color: rgba(255, 255, 255, 0.60);
     font-size: 12px;
+    margin-top: 2px;
 }
 
 .schedule-time-list_item{
@@ -681,17 +688,16 @@ textarea::-webkit-scrollbar-thumb {
     color: #C31D41;
 }
 
-.tab-schedule > input[type="radio"] {
+.tab-schedule-item > input[type="radio"] {
     display: none;
 }
 
-.tab-schedule > label {
-    margin-right: 25px;
+.tab-schedule-item > span {
     display: block;
     cursor: pointer;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
     text-decoration: none;
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: none;
     border: 1px solid rgba(255, 255, 255, 0.80);
     color: rgba(255, 255, 255, 0.80);
@@ -703,29 +709,51 @@ textarea::-webkit-scrollbar-thumb {
     text-align: center;
 }
 
-.tab-schedule > input[type="radio"]:checked + label {
-    cursor: default;
+/* Стили для выделенной радиокнопки */
+.selected > span {
     color: #C31D41;
     border: 1px solid #C31D41;
     border-radius: 15px;
 }
-input[type="radio"]:checked + label + .tab-content {
-    display: block;
-}
+
 .tab-content {
     display: none;
     width: 100%;
 }
 
-.tab-schedule{
-    margin-top: 50px;
+/* Контейнер для радиокнопок с датами */
+.radio-container {
     display: flex;
-    flex-wrap: wrap;
+    overflow-x: auto; /* Позволяет скроллить содержимое по горизонтали */
+    gap: 25px; /* Расстояние между радиокнопками */
+    white-space: nowrap; /* Ожидается, что элементы не будут переноситься на новую строку */
+    margin: 50px 0 ;
+    padding-bottom: 5px;
 }
-
+/* Стилизация полосы прокрутки для WebKit-браузеров */
+.radio-container::-webkit-scrollbar {
+    height: 8px; /* Высота горизонтальной полосы прокрутки */
+}
+.radio-container::-webkit-scrollbar-track {
+    background: none; /* Убирает белый фон трека */
+}
+.radio-container::-webkit-scrollbar-thumb {
+    background-color: #2d2d2d;
+    border-radius: 4px;
+}
+.radio-container::-webkit-scrollbar-thumb:hover {
+    background-color: #3d3d3d;
+}
+.tab-schedule-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
 .booking_film{
     position: relative;
-    margin: 50px 0 80px;
+    margin: 50px 0 25px;
 }
 .booking_film-container{
     display: flex;
@@ -753,27 +781,59 @@ input[type="radio"]:checked + label + .tab-content {
 }
 
 .booking-seat-form{
-    margin-top: 80px;
-    height: 100vh;
+    margin-top: 25px;
     margin-bottom: 60px;
-}
 
+}
 .screen-booking{
     text-align: center;
 }
 
-.checkbox-row {
+.text-seat{
+    color: rgba(0, 0, 0, 0.60);
+    font-size: 10px;
+}
+.select-seat-form{
+
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.chairs-example{
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+}
+.example{
+    display: flex;
+    gap: 20px;
+}
+.text-example{
+    margin-top: 5px;
+}
+.hall-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/*Скрыть стандартный флажок*/
-.checkbox-row input[type='checkbox'] {
-    display: none;
+.hall-container {
+    margin-top: 40px;
+    text-align: center;
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    gap: 20px;
+    align-items: center;
 }
-
-/*Стили для кастомного флажка*/
-.checkbox-row .custom-checkbox + label {
-    background-image: url('/public/assets/images/Icons/Icon_chair_white.svg');
+.row {
+    display: flex;
+    gap: 5px;
+}
+.seat {
+    background-image: url('../icons/Icon_chair_white.svg');
     width: 32px;
     height: 29px;
     display: inline-block;
@@ -781,98 +841,28 @@ input[type="radio"]:checked + label + .tab-content {
     text-align: center;
     vertical-align: middle;
 }
-
-.checkbox-row .custom-checkbox:checked + label {
-    background-image: url('/public/assets/images/Icons/Icon_chair_red.svg');
+.seat.reserved {
+    background-image: url('../icons/Icon_chair_black.svg');
+    cursor: not-allowed;
 }
-
-.checkbox-row .custom-checkbox:disabled + label {
-    background-image: url('/public/assets/images/Icons/Icon_chair_black.svg');
+.seat.selected {
+    background-image: url('../icons/Icon_chair_red.svg');
 }
-
-.text-seat{
-    color: rgba(0, 0, 0, 0.60);
-    font-size: 10px;
-}
-
-.select-seat-form{
-    margin-top: 60px;
-    text-align: center;
+.selected-seats_block{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
-
-.chairs-example{
-    display: flex;
-    gap: 40px;
-    margin-top: 50px;
-}
-
-.example{
-    display: flex;
-    gap: 20px;
-}
-
-.text-example{
-    margin-top: 5px;
-}
-
-.num_rows_label-left{
-    margin-top: 5px;
-    margin-right: 40px;
-}
-
-.num_rows_label-right{
-    margin-top: 5px;
-    margin-left: 40px;
-}
-
-.title-ticket-section{
-    margin-top: 50px;
-}
-
-.all-tickets-list{
-    margin-bottom: 80px;
-}
-
-.all-tickets-list_item{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 60px;
-    background-color: #262624;
-    width: 100%;
-    height: 290px;
+.selected-seats-background{
+    background-color: #2d2d2d;
     border-radius: 15px;
-}
-
-.all-tickets-list_item-text{
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-right: 30px;
-    width: 100%;
-}
-
-.all-tickets-list_item-text_line{
+    border: 2px solid #2d2d2d;
+    margin-bottom: 10px;
+    height: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-top: 30px;
 }
-
-.all-tickets-list_item-code{
-    margin-right: 30px;
-    margin-top: 31px;
-}
-
-
-
-
-
-
-
-
-
-
-

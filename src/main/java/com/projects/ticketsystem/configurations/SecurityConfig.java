@@ -1,6 +1,5 @@
 package com.projects.ticketsystem.configurations;
 
-import com.projects.ticketsystem.services.MyUserDetailsServices;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,9 +21,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers( "/**", "/movie/**", "/registration", "/login").permitAll()
-                    .requestMatchers("/static/**", "/images/**", "/assets/**").permitAll()
-                    .anyRequest().authenticated())
+                    .requestMatchers("/reservation/**", "/admin/**").authenticated()
+                    .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                    .anyRequest().permitAll())
             .formLogin((form) -> form
                     .loginPage("/login")
                     .defaultSuccessUrl("/")

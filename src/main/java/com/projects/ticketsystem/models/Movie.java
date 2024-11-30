@@ -18,7 +18,7 @@ public class Movie {
     @Column(name = "movie_name")
     private String name;
 
-    @Column(name = "movie_description")
+    @Column(name = "movie_description", length = 1024)
     private String description;
 
     @Column(name = "movie_actors")

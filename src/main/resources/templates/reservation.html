@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="~{components/head :: head}"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/reservation.js"></script>
+<body>
+<div class="wrapper">
+    <header th:insert="components/header :: header"></header>
+    <main class="main">
+        <div class="container">
+            <section class="booking_film">
+                <div class="booking_film-container">
+                    <div class="poster-booking_film-container">
+                        <div class="poster-booking_film">
+                            <img th:src="@{'/assets/images/uploads/' + ${movie.poster_film}}" alt="" class="poster_booking_film-img">
+                        </div>
+                    </div>
+                    <div class="booking_film-text">
+                        <div class="booking_film-name-film">
+                            <h1 th:text="${movie.name}"></h1>
+                        </div>
+                        <div class="booking_film-block">
+                            <h4 th:text="@{${formattedDate} + ' в ' + ${show.time}}"></h4>
+                            <h4 th:text="${movie.duration} + ' мин.'"></h4>
+                            <h4 id="show-cost" th:text="${show.cost + '₽'}"></h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="booking-seat-form">
+                <div class="screen-booking">
+                    <img src="/assets/icons/Screen.svg" alt="" class="screen-booking-img">
+                </div>
+                <div class="hall-wrapper">
+                    <div class="hall-container">
+                        <!-- Ряды и места -->
+                        <div th:each="row : ${#numbers.sequence(1, 9)}" class="row">
+                            <div th:each="seat : ${#numbers.sequence(1, 20)}"
+                                 class="seat"
+                                 th:classappend="${#lists.contains(reservedSeats, row + '-' + seat)} ? 'reserved' : 'free'"
+                                 th:data-row="${row}"
+                                 th:data-seat="${seat}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="chairs-example">
+                    <div class="example">
+                        <img src="/assets/icons/Icon_chair_white.svg" alt="">
+                        <h4 class="text-example">Свободно</h4>
+                    </div>
+                    <div class="example">
+                        <img src="/assets/icons/Icon_chair_red.svg" alt="">
+                        <h4 class="text-example">Выбранное вами</h4>
+                    </div>
+                    <div class="example">
+                        <img src="/assets/icons/Icon_chair_black.svg" alt="">
+                        <h4 class="text-example">Занято</h4>
+                    </div>
+                </div>
+                <!-- Выбранные места -->
+                <div class="selected-seats">
+                    <div class="selected-seats_block">
+                        <h3>Выбранные места:</h3>
+                        <h3>Общая стоимость: <span id="total-cost">0</span> ₽</h3>
+                    </div>
+                    <ul id="selected-seats-list"></ul>
+                </div>
+                <button id="confirm-reservation" class="btn">Купить</button>
+            </section>
+        </div>
+    </main>
+    <footer th:insert="components/footer :: footer"></footer>
+</div>
+</body>
+</html>

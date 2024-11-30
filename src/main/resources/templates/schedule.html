@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="~{components/head :: head}"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/schedule.js"></script>
+<body>
+<div class="wrapper">
+    <header th:insert="components/header :: header"></header>
+    <main class="main">
+        <div class="container">
+            <section class="schedule">
+                <!-- Контейнер для радиокнопок с датами -->
+                <div class="radio-container">
+                    <div th:each="date : ${availableDates}">
+                        <label class="tab-schedule-item">
+                            <input type="radio" class="date-radio" th:data-date="${date}" th:value="${date}" th:id="'date-' + ${date}" th:name="tab-btn">
+                            <span th:text="${date}"></span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Контейнер для сеансов -->
+                <div id="shows" class="shows_block" th:include="components/showsFragment :: showsFragment"></div>
+            </section>
+        </div>
+    </main>
+    <footer th:insert="components/footer :: footer"></footer>
+</div>
+</body>
+</html>
