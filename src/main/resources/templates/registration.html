@@ -2,61 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="components/head :: head"></head>
 <body>
-
 <div class="wrapper">
-
     <header th:insert="components/header :: header"></header>
-
     <main class="main">
         <div class="container">
             <div class="form-centre">
                 <div class="register-form">
                     <h1 class="form_title">Регистрация</h1>
                     <form th:action="@{/registration}" method="post" class="register_form">
-                        <input
-                                type="text"
-                                id="FIO"
-                                name="FIO"
-                                class="custom-input"
-                                placeholder="Имя и фамилия"
-                        required
-                        ><br>
-                        <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                class="custom-input"
-                                placeholder="E-mail"
-                        required
-                        > <br>
-                        <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="custom-input"
-                                placeholder="Пароль"
-                        required
-                        > <br>
-<!--                        <input-->
-<!--                                type="password"-->
-<!--                                id="password_confirmation"-->
-<!--                                name="password_confirmation"-->
-<!--                                class="custom-input"-->
-<!--                                placeholder="Подтверждение пароля"-->
-<!--                                required-->
-<!--                        ><br>-->
-                        <button
-                                type="submit"
-                                class="btn"
-                        >
-                            Создать аккаунт
-                        </button>
+                        <input type="text" id="FIO" name="FIO" class="custom-input" placeholder="Имя и фамилия" required><br>
+                        <input type="email" id="email" name="email" class="custom-input" placeholder="E-mail" required><br>
+                        <input type="password" id="password" name="password" class="custom-input" placeholder="Пароль" required><br>
+<!--                        <input type="password" id="password_confirmation" name="password_confirmation" class="custom-input" placeholder="Подтверждение пароля" required><br>-->
+                        <button type="submit" class="btn">Создать аккаунт</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
-
 </div>
 </body>
 </html>

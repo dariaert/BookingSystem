@@ -2,11 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="components/head :: head"></head>
 <body>
-
 <div class="wrapper">
-
     <header th:insert="components/header :: header"></header>
-
     <main class="main">
         <div class="container">
             <section th:each="el : ${movie}" class="about_film">
@@ -21,48 +18,37 @@
                         <div class="about_film-name-film">
                             <h1 th:text="${el.name}"></h1>
                         </div>
-
                         <div class="about_film-block-criteria">
                             <div class="about_film-criteria">Жанр:</div>
                             <div th:text="${el.genre.genreName}" class="about_film-info"></div>
                         </div>
-
                         <div class="about_film-block-criteria">
                             <div class="about_film-criteria">Режиссер:</div>
                             <div th:text="${el.filmmaker}" class="about_film-info"></div>
                         </div>
-
                         <div class="about_film-block-criteria">
                             <div class="about_film-criteria">В ролях:</div>
                             <div th:text="${el.actors}" class="about_film-info"></div>
                         </div>
-
                         <div class="about_film-block-criteria">
                             <div class="about_film-criteria">Страна:</div>
                             <div th:text="${el.country}" class="about_film-info"></div>
                         </div>
-
                         <div class="about_film-block-criteria">
                             <div class="about_film-criteria">Продолжительность:</div>
                             <div th:text="${el.duration} + ' мин.'" class="about_film-info"></div>
                         </div>
-
-
                     </div>
                 </div>
-
                 <div class="about_film-description">
                     <div class="about_film-description">
                         <h1>Описание</h1>
                     </div>
                     <div th:text="${el.description}" class="about_film-info"><p></p></div>
                 </div>
-
             </section>
-
         </div>
     </main>
-
     <footer th:insert="components/footer :: footer"></footer>
 
 </div>

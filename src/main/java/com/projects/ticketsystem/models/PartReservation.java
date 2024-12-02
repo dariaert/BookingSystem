@@ -5,20 +5,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "ticket_table")
-public class Ticket {
+@Table(name = "partreservation_table")
+public class PartReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ticket_id")
+    @Column(name = "partReservation_id")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
+
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
 }

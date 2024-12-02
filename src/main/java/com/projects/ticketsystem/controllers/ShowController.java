@@ -1,8 +1,10 @@
 package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.Movie;
+import com.projects.ticketsystem.models.Seat;
 import com.projects.ticketsystem.models.Show;
 import com.projects.ticketsystem.repositories.MovieRepository;
+import com.projects.ticketsystem.repositories.SeatRepository;
 import com.projects.ticketsystem.repositories.ShowRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +27,7 @@ public class ShowController {
 
     private final ShowRepository showRepository;
     private final MovieRepository movieRepository;
+    private final SeatRepository seatRepository;
 
     @GetMapping("/admin/shows")
     public String adminShows(Model model) {
@@ -36,7 +39,7 @@ public class ShowController {
     }
 
     @GetMapping("/redact/show/{id}")
-    public String movieDetails(@PathVariable(value = "id") long showId, Model model) {
+    public String showDetails(@PathVariable(value = "id") long showId, Model model) {
         Iterable<Movie> movies = movieRepository.findAll();
         Optional<Show> show = showRepository.findById(showId);
         ArrayList<Show> arrayList = new ArrayList<>();
@@ -52,13 +55,23 @@ public class ShowController {
                                  @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
                                  @RequestParam("cost") int cost,
                                  Model model) throws IOException {
-
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid genre ID: " + movieId));
-
         Show show = new Show(movie, cost, date, time);
         showRepository.save(show);
-
+        int rows = 9;
+        int seatNumber = 20;
+        // Для каждого ряда и места создаем записи в таблице seats
+        for (int row = 1; row <= rows; row++) {
+            for (int seat = 1; seat <= seatNumber; seat++) {
+                Seat seatEntity = new Seat();
+                seatEntity.setRowNumber(row);
+                seatEntity.setSeatNumber(seat);
+                seatEntity.setReserved(false);
+                seatEntity.setShow(show);
+                seatRepository.save(seatEntity);
+            }
+        }
         return "redirect:/admin/shows";
     }
 
@@ -76,13 +89,10 @@ public class ShowController {
                                    @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
                                    @RequestParam("cost") int cost,
                                    Model model) throws IOException {
-
         Show show = showRepository.findById(showId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid show ID: " + showId));
-
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid movie ID: " + movieId));
-
         show.setDate(date);
         show.setTime(time);
         show.setCost(cost);

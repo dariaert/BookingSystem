@@ -1,5 +1,6 @@
 $(document).ready(function () {
     let selectedSeats = [];
+    let showId = $("#showId").val();
     // Получаем стоимость сеанса из элемента с id="show-cost"
     const seatCost = parseInt(document.getElementById('show-cost').textContent.replace('₽', '').trim() || 0); // Убираем символ ₽ и пробелы
 
@@ -41,20 +42,28 @@ $(document).ready(function () {
             alert("Пожалуйста, выберите места перед покупкой!");
             return;
         }
+        console.log("selectedSeats:", selectedSeats);
+        console.log("costPerSeat:", seatCost);
+        console.log("showId:", showId);
 
         $.ajax({
             url: "/reservation",
             type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                seats: selectedSeats,
-                costPerSeat: seatCost
-            }),
+            contentType: 'application/x-www-form-urlencoded',
+            data: {
+                seatIds: selectedSeats,
+                costPerSeat: seatCost,
+                showId: showId
+            },
+            traditional: true,
             success: function (response) {
                 alert(response);
                 window.location.href = "/";
             },
-            error: function () {
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Выводим ошибки в консоль
+                console.log("Error:", textStatus, errorThrown);
+                console.log("jqXHR:", jqXHR);
                 alert("Ошибка бронирования!");
             }
         });

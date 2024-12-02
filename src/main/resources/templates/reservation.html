@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:insert="~{components/head :: head}"></div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="/assets/js/reservation.js"></script>
 <body>
 <div class="wrapper">
@@ -23,6 +23,7 @@
                             <h4 th:text="@{${formattedDate} + ' в ' + ${show.time}}"></h4>
                             <h4 th:text="${movie.duration} + ' мин.'"></h4>
                             <h4 id="show-cost" th:text="${show.cost + '₽'}"></h4>
+                            <input type="hidden" id="showId" th:value="${show.id}" />
                         </div>
                     </div>
                 </div>
@@ -33,13 +34,16 @@
                 </div>
                 <div class="hall-wrapper">
                     <div class="hall-container">
-                        <!-- Ряды и места -->
-                        <div th:each="row : ${#numbers.sequence(1, 9)}" class="row">
-                            <div th:each="seat : ${#numbers.sequence(1, 20)}"
-                                 class="seat"
-                                 th:classappend="${#lists.contains(reservedSeats, row + '-' + seat)} ? 'reserved' : 'free'"
-                                 th:data-row="${row}"
-                                 th:data-seat="${seat}">
+                        <!-- Итерация по рядам -->
+                        <div th:each="entry : ${seatsByRow}">
+                            <div class="row">
+                                <!-- Итерация по местам в каждом ряду -->
+                                <div th:each="seat : ${entry.value}" class="seat"
+                                     th:classappend="${seat.isReserved} ? 'reserved' : 'free'"
+                                     th:data-id="${seat.id}"
+                                     th:data-row="${seat.rowNumber}"
+                                     th:data-seat="${seat.seatNumber}">
+                                </div>
                             </div>
                         </div>
                     </div>

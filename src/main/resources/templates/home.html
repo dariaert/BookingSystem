@@ -2,11 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="components/head :: head"></head>
 <body>
-
 <div class="wrapper">
-
 <header th:insert="components/header :: header"></header>
-
 <main class="main">
     <div class="slider">
         <div class="slides">
@@ -16,12 +13,10 @@
             <img class="servers_image" src="/assets/images/Slide2.jpg" alt="">
         </div>
     </div>
-
     <div class="container">
         <div class="poster-title">
             <h1>Афиша</h1>
         </div>
-
         <div class="poster_list">
             <a th:each="el : ${movies}" th:href="'/movie/' + ${el.id}">
                 <div class="poster-list-item">
@@ -39,12 +34,12 @@
                 </div>
             </a>
         </div>
-
     </div>
 </main>
-
 <footer th:insert="components/footer :: footer"></footer>
-
 </div>
 </body>
 </html>
+
+
+

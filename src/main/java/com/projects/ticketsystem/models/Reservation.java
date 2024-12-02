@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
@@ -26,7 +25,8 @@ public class Reservation {
     @Column(name = "reservation_time")
     private LocalDateTime reservationTime;
 
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    @ManyToOne
+    @JoinColumn(name = "show_id")
+    private Show show;
 
 }

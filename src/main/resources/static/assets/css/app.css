@@ -829,7 +829,8 @@ textarea::-webkit-scrollbar-thumb {
     align-items: center;
 }
 .row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
     gap: 5px;
 }
 .seat {
