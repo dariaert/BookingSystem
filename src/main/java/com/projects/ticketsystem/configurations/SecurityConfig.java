@@ -21,7 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers("/reservation/**", "/admin/**").authenticated()
+                    .requestMatchers("/reservation", "/admin/**").authenticated()
                     .requestMatchers("/admin/**").hasAuthority("ADMIN")
                     .anyRequest().permitAll())
             .formLogin((form) -> form
@@ -33,7 +33,8 @@ public class SecurityConfig {
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/login?logout")
                     .permitAll()
-            );
+            )
+                .csrf((csrf) -> csrf.disable());
 
         return http.build();
     }

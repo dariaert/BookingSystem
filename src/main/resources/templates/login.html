@@ -2,11 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="components/head :: head"></head>
 <body>
-
 <div class="wrapper">
-
     <header th:insert="components/header :: header"></header>
-
     <main class="main">
         <div class="container">
             <div class="form-centre">
@@ -36,17 +33,14 @@
                     <div class="register-link">
                         <a th:href="@{/registration}">Зарегистрироваться</a>
                     </div>
-
                     <!-- Сообщение об ошибке -->
                     <div th:if="${param.error}">
                         <p style="color: red;">Invalid email or password.</p>
                     </div>
-
                     <!-- Сообщение об успешном выходе -->
                     <div th:if="${param.logout}">
                         <p style="color: green;">You have been logged out successfully.</p>
                     </div>
-
                 </div>
             </div>
         </div>
