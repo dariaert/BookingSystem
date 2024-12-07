@@ -108,18 +108,7 @@ public class MovieController {
         movie.setGenre(genre);
         movie.setAge(age);
         movieRepository.save(movie);
-        return "redirect:/admin/movies";
-    }
-
-    @GetMapping("/admin/movies")
-    public String adminMovies(Model model) {
-        Iterable<Movie> movies = movieRepository.findAll();
-        Iterable<Genre> genres = genreRepository.findAll();
-        Iterable<Age> ages = ageRepository.findAll();
-        model.addAttribute("movies", movies);
-        model.addAttribute("genres", genres);
-        model.addAttribute("ages", ages);
-        return "admin/movies";
+        return "redirect:/admin";
     }
 
     @PostMapping("/movie/add")
@@ -173,7 +162,7 @@ public class MovieController {
 //
 //        movieRepository.save(movie);
 
-        return "redirect:/admin/movies";
+        return "redirect:/admin";
     }
 
     @PostMapping("/remove/movie/{id}")
@@ -190,6 +179,6 @@ public class MovieController {
             }
         }
         movieRepository.delete(movie);
-        return "redirect:/admin/movies";
+        return "redirect:/admin";
     }
 }

@@ -29,15 +29,6 @@ public class ShowController {
     private final MovieRepository movieRepository;
     private final SeatRepository seatRepository;
 
-    @GetMapping("/admin/shows")
-    public String adminShows(Model model) {
-        Iterable<Show> shows = showRepository.findAll();
-        Iterable<Movie> movies = movieRepository.findAll();
-        model.addAttribute("shows", shows);
-        model.addAttribute("movies", movies);
-        return "admin/shows";
-    }
-
     @GetMapping("/redact/show/{id}")
     public String showDetails(@PathVariable(value = "id") long showId, Model model) {
         Iterable<Movie> movies = movieRepository.findAll();
@@ -72,14 +63,14 @@ public class ShowController {
                 seatRepository.save(seatEntity);
             }
         }
-        return "redirect:/admin/shows";
+        return "redirect:/admin";
     }
 
     @PostMapping("/remove/show/{id}")
     public String adminShowRemove(@PathVariable(value = "id") long showId, Model model) {
         Show show = showRepository.findById(showId).orElseThrow();
         showRepository.delete(show);
-        return "redirect:/admin/shows";
+        return "redirect:/admin";
     }
 
     @PostMapping("/redact/show/{id}")
@@ -98,7 +89,7 @@ public class ShowController {
         show.setCost(cost);
         show.setMovie(movie);
         showRepository.save(show);
-        return "redirect:/admin/shows";
+        return "redirect:/admin";
     }
 
 }

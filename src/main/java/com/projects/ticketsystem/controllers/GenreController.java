@@ -20,13 +20,6 @@ public class GenreController {
 
     private final GenreRepository genreRepository;
 
-    @GetMapping("/admin/genres")
-    public String adminGenres(Model model) {
-        Iterable<Genre> genres = genreRepository.findAll();
-        model.addAttribute("genres", genres);
-        return "admin/genres";
-    }
-
     @GetMapping("/redact/genre/{id}")
     public String genreDetails(@PathVariable(value = "id") long genreId, Model model) {
         Optional<Genre> genre = genreRepository.findById(genreId);
@@ -40,7 +33,7 @@ public class GenreController {
     public String adminGenreAdd(@RequestParam("name_genre") String nameGenre, Model model) {
         Genre genre = new Genre(nameGenre);
         genreRepository.save(genre);
-        return "redirect:/admin/genres";
+        return "redirect:/admin";
     }
 
     @PostMapping("/redact/genre/{id}")
@@ -48,14 +41,14 @@ public class GenreController {
         Genre genre = genreRepository.findById(genreId).orElseThrow();
         genre.setGenreName(nameGenre);
         genreRepository.save(genre);
-        return "redirect:/admin/genres";
+        return "redirect:/admin";
     }
 
     @PostMapping("/remove/genre/{id}")
     public String adminGenreRemove(@PathVariable(value = "id") long genreId, Model model) {
         Genre genre = genreRepository.findById(genreId).orElseThrow();
         genreRepository.delete(genre);
-        return "redirect:/admin/genres";
+        return "redirect:/admin";
     }
 
 }

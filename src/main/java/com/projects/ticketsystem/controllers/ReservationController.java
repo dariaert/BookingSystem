@@ -85,7 +85,7 @@ public class ReservationController {
             selectedSeats.add(seat);
         }
 
-        // Создаем заказ
+        // Создаем заказ0
         Reservation reservation = new Reservation();
         reservation.setUser(user);
         reservation.setShow(show);

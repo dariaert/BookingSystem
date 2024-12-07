@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="components/head :: head"></head>
+<script src="/assets/js/admin.js"></script>
+<body>
+<div class="wrapper">
+    <div class="admin-panel">
+        <!-- Меню -->
+        <nav class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/assets/icons/Logo.svg" alt="Логотип" class="logo__img">
+            </div>
+            <ul>
+                <li><a href="#" data-section="movie">Фильмы</a></li>
+                <li><a href="#" data-section="genre">Жанры</a></li>
+                <li><a href="#" data-section="show">Сеансы</a></li>
+                <li><a href="#" data-section="user">Пользователи</a></li>
+            </ul>
+            <div class="logout">
+                <a href="/">На главную</a>
+                <a href="/logout">Выход</a>
+            </div>
+        </nav>
+        <!-- Контент -->
+        <main class="content">
+            <div id="movie" class="content-section">
+                <div th:include="components/fragments/adminMovieFragment :: adminMovieFragment"></div>
+            </div>
+            <div id="genre" class="content-section">
+                <div th:include="components/fragments/adminGenreFragment :: adminGenreFragment"></div>
+            </div>
+            <div id="show" class="content-section">
+                <div th:include="components/fragments/adminShowFragment"></div>
+            </div>
+            <div id="user" class="content-section">Список пользователей сайта.</div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

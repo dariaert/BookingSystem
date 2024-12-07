@@ -10,36 +10,17 @@
                 <div class="login-form">
                     <h1 class="form_title">Вход</h1>
                     <form th:action="@{/login}" method="post" class="register_form">
-                        <input type="email"
-                               name="username"
-                               class="custom-input"
-                               placeholder="E-mail"
-                        required
-                        > <br>
-                        <input type="password"
-                               id="password"
-                               name="password"
-                               class="custom-input"
-                               placeholder="******"
-                               required
-                        > <br>
-                        <button
-                                type="submit"
-                                class="btn"
-                        >
-                            Войти
-                        </button>
+                        <input type="email" name="username" class="custom-input" placeholder="E-mail" required><br>
+                        <input type="password" id="password" name="password" class="custom-input" placeholder="******" required><br>
+                        <div th:if="${param.error}">
+                            <p class="hint">
+                                Неверный логин или пароль
+                            </p>
+                        </div>
+                        <button type="submit" class="btn">Войти</button>
                     </form>
                     <div class="register-link">
                         <a th:href="@{/registration}">Зарегистрироваться</a>
-                    </div>
-                    <!-- Сообщение об ошибке -->
-                    <div th:if="${param.error}">
-                        <p style="color: red;">Invalid email or password.</p>
-                    </div>
-                    <!-- Сообщение об успешном выходе -->
-                    <div th:if="${param.logout}">
-                        <p style="color: green;">You have been logged out successfully.</p>
                     </div>
                 </div>
             </div>

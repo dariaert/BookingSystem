@@ -1,8 +1,9 @@
 package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.User;
-import com.projects.ticketsystem.services.UserService;
+import com.projects.ticketsystem.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/registration")
     public String registration() {
@@ -25,7 +27,9 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registration(User user) {
-        userService.save(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("USER");
+        userRepository.save(user);
         return "redirect:/login";
     }
 
