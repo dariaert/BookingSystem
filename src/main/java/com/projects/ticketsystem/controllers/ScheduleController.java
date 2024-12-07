@@ -54,7 +54,7 @@ public class ScheduleController {
                                         .sorted(Comparator.comparing(Show::getTime))
                                         .collect(Collectors.toList()))));
         model.addAttribute("showsGroupedByMovie", showsGroupedByMovie);
-        return "components/showsFragment :: showsFragment";
+        return "components/fragments/showsFragment :: showsFragment";
     }
 
 }

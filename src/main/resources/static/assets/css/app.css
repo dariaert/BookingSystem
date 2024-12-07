@@ -1,6 +1,9 @@
 html{
     box-sizing: border-box;
 }
+html::-webkit-scrollbar {
+    display: none;
+}
 *, *::after, *::before{
     box-sizing: inherit;
     margin: 0;
@@ -160,7 +163,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .footer__logo h4{
     margin-top: 20px;
 }
-
 .form_title{
     margin-bottom: 55px;
 }
@@ -547,7 +549,6 @@ textarea::-webkit-scrollbar-thumb {
 .redact-film-form-block{
     width: 100%;
     position: relative;
-    margin-bottom: 60px;
 }
 
 .genre-content-list{
@@ -620,6 +621,7 @@ textarea::-webkit-scrollbar-thumb {
 
 .redact_film{
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 .container-text{
@@ -866,4 +868,87 @@ textarea::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.sidebar {
+    width: 250px;
+    background-color: #1C1818;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid black;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar ul li {
+    margin: 15px 0;
+}
+.sidebar ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    padding: 15px 25px;
+}
+.sidebar ul li a:hover {
+    color: #C31D41;
+}
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #1C1C1A;
+    overflow-y: auto;
+}
+.content::-webkit-scrollbar {
+    display: none;
+}
+.content-section {
+    display: none;
+}
+.content-section.active {
+    display: block;
+}
+.admin-panel {
+    display: flex;
+    height: 100vh;
+}
+.sidebar-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+.logo__img {
+    max-width: 100%;
+    height: auto;
+}
+.sidebar ul li a.active {
+    background-color: #262626;
+    color: #C31D41;
+    border-radius: 4px;
+}
+.logout {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px 0;
+}
+.logout a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 15px 15px;
+    display: inline-block;
+    border-radius: 15px;
+    border: 1px solid #C31D41;
+    transition: background-color 0.3s ease;
+}
+.logout a:hover {
+    background-color: #C31D41;
+}
+.hint{
+    margin-top: 8px;
+    width: 440px;
+    font-size: 12px;
+    color: #575757;
 }

@@ -17,8 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ScheduleService {
 
-    @Autowired
-    private ShowRepository showRepository;
+    private final ShowRepository showRepository;
 
     public List<Show> getShowsByDate(LocalDate date) {
         return showRepository.findAllByDate(date);

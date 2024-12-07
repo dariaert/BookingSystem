@@ -12,29 +12,22 @@
                 <nav class="menu">
                     <ul class="menu__list">
                         <li sec:authorize="hasAuthority('ADMIN')" class="menu__list-item">
-                            <a th:href="@{/admin/movies}" class="menu__list-link header-animation-line">Админка</a>
+                            <a th:href="@{/admin}" class="menu__list-link header-animation-line">Админка</a>
                         </li>
                         <li class="menu__list-item">
                             <a th:href="@{/schedule}" class="menu__list-link header-animation-line">Расписание</a>
                         </li>
                         <li class="menu__list-item header_icon" sec:authorize="!isAuthenticated()">
-<!--                            <div class="entrance-icon">-->
-<!--                                <img src="/assets/icons/header_entrance.svg" alt="">-->
-<!--                            </div>-->
                             <a th:href="@{/login}" class="menu__list-link header-animation-line">Вход</a>
                         </li>
                         <li sec:authorize="isAuthenticated()" class="menu__list-item header_icon">
-<!--                            <div class="user-icon">-->
-<!--                                <img src="/assets/icons/header_user.svg" alt="">-->
-<!--                            </div>-->
-                            <a href="#" class="menu__list-link header-animation-line">Профиль</a>
+                            <a th:href="@{#}" class="menu__list-link header-animation-line">
+                                <span th:text="${#authentication.name}">Профиль</span>
+                            </a>
                         </li>
                         <li class="menu__list-item header_icon" sec:authorize="isAuthenticated()">
                             <form th:action="@{/logout}" method="post">
                                 <button type="submit" class="header_icon header-animation-line logout-btn">
-<!--                                    <div class="entrance-icon">-->
-<!--                                        <img src="/assets/icons/header_entrance.svg" alt="">-->
-<!--                                    </div>-->
                                     <h4 class="menu__list-link header-animation-line">Выход</h4>
                                 </button>
                             </form>

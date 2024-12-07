@@ -9,11 +9,17 @@
             <div class="form-centre">
                 <div class="register-form">
                     <h1 class="form_title">Регистрация</h1>
-                    <form th:action="@{/registration}" method="post" class="register_form">
-                        <input type="text" id="FIO" name="FIO" class="custom-input" placeholder="Имя и фамилия" required><br>
+                    <form th:action="@{/registration}" method="post" class="register_form" id="registerForm">
+                        <input type="text" id="FIO" name="FIO" class="custom-input" placeholder="Имя" required><br>
+                        <div class="error" id="FIO_error"></div>
                         <input type="email" id="email" name="email" class="custom-input" placeholder="E-mail" required><br>
                         <input type="password" id="password" name="password" class="custom-input" placeholder="Пароль" required><br>
-<!--                        <input type="password" id="password_confirmation" name="password_confirmation" class="custom-input" placeholder="Подтверждение пароля" required><br>-->
+                        <div class="error" id="password_error"></div>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="custom-input" placeholder="Подтверждение пароля" required><br>
+                        <div class="error" id="password_confirmation_error"></div>
+                        <div id="password-hint" class="hint">
+                            Пароль должен содержать минимум 8 символов, включая цифры, буквы и специальные символы.
+                        </div>
                         <button type="submit" class="btn">Создать аккаунт</button>
                     </form>
                 </div>
@@ -21,5 +27,6 @@
         </div>
     </main>
 </div>
+<script src="/assets/js/validation.js"></script>
 </body>
 </html>
