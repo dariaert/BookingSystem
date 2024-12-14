@@ -9,7 +9,7 @@
             <section th:each="movie : ${movies}" class="redact_film">
                 <div class="container">
                     <h1>Обновление фильма</h1> <hr>
-                    <form th:action="'/redact/movie/' + ${movie.id}" method="post" class="redact-film-form" enctype="multipart/form-data">
+                    <form th:action="'/edit/movie/' + ${movie.id}" method="post" class="redact-film-form" enctype="multipart/form-data">
                         <div class="redact-film-form-block">
                             <div class="redact-film-form-block-item">
                                 <input type="hidden" name="id" th:value="${movie.id}">

@@ -1,63 +1,55 @@
 <div th:fragment="adminMovieFragment">
     <section class="all-films">
         <h2>Фильмы</h2>
-        <div th:each="movie : ${movies}">
-            <hr style="margin-bottom: 0;">
-            <div class="film-content-list">
-                <div class="film-content-list-item" style="margin-bottom: 20px;">
-                    <div class="film-content-list-item_item">
-                        <span th:text="${movie.age.age}" class="ageLimit" style="margin: 0; align-items: center"></span>
-                        <div class="btns-content" style="display: flex; gap: 15px;">
-                            <a th:href="'/redact/movie/' + ${movie.id}" class="btn-admin-panel">
-                                <div class="admin-panel-text">
-                                    <div class="panel-icon">
-                                        <img src="/assets/icons/Edit.svg" alt="">
-                                    </div>
-                                    <h4>Изменить</h4>
-                                </div>
-                            </a>
-                            <form th:action="'/remove/movie/' + ${movie.id}" method="post">
-                                <input type="hidden" name="id_poster" id="id_poster" th:value="${movie.poster_film}">
-                                <button class="btn-admin-panel" type="submit">
-                                    <div class="admin-panel-text">
-                                        <div class="panel-icon">
-                                            <img src="/assets/icons/Delete.svg" alt="">
-                                        </div>
-                                        <h4>Удалить</h4>
-                                    </div>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="film-content-list-item">
-                    <table style="width: 100%">
-                        <tr>
-                            <td class="show-table-zag show-table-content">Постер</td>
-                            <td class="show-table-zag show-table-content">Название</td>
-                            <td class="show-table-zag show-table-content">Жанр</td>
-                            <td class="show-table-zag show-table-content">Режиссер</td>
-                            <td class="show-table-zag show-table-content">В ролях</td>
-                            <td class="show-table-zag show-table-content">Страна</td>
-                            <td class="show-table-zag show-table-content">Продолжительность</td>
-                            <td class="show-table-zag show-table-content">Описание</td>
-                        </tr>
-                        <tr>
-                            <td class="show-table-content">
-                                <img th:src="@{'/assets/images/uploads/' + ${movie.poster_film}}" alt="" class="poster-img">
-                            </td>
-                            <td th:text="${movie.name}" class="show-table-content"></td>
-                            <td th:text="${movie.genre.genreName}" class="show-table-content"></td>
-                            <td th:text="${movie.filmmaker}" class="show-table-content"></td>
-                            <td th:text="${movie.actors}" class="show-table-content"></td>
-                            <td th:text="${movie.country}" class="show-table-content"></td>
-                            <td th:text="${movie.duration} + ' мин.'" class="show-table-content"></td>
-                            <td th:text="${movie.description}" class="show-table-content"></td>
-                        </tr>
-                    </table>
+        <hr style="margin-bottom: 0;">
+        <div class="film-content-list">
+            <table style="width: 100%">
+                <tr>
+                    <th class="show-table-zag show-table-content">Постер</th>
+                    <th class="show-table-zag show-table-content">Название</th>
+                    <th class="show-table-zag show-table-content">Жанр</th>
+                    <th class="show-table-zag show-table-content">Возрастное ограничение</th>
+                    <th class="show-table-zag show-table-content">Режиссер</th>
+                    <th class="show-table-zag show-table-content">В ролях</th>
+                    <th class="show-table-zag show-table-content">Страна</th>
+                    <th class="show-table-zag show-table-content">Продолжительность</th>
+                    <th class="show-table-zag show-table-content">Описание</th>
+                </tr>
 
+                <div th:each="movie : ${movies}">
+                    <tr>
+                        <td class="show-table-content" style="text-align: center; vertical-align: middle;">
+                            <a th:href="'/movie/' + ${movie.id}">
+                                <img th:src="@{'/assets/images/uploads/' + ${movie.poster_film}}" alt="" class="poster-img">
+                            </a>
+                        </td>
+                        <td th:text="${movie.name}" class="show-table-content"></td>
+                        <td th:text="${movie.genre.genreName}" class="show-table-content"></td>
+                        <td class="show-table-content"><span th:text="${movie.age.age}" class="ageLimit-admin"></span></td>
+                        <td th:text="${movie.filmmaker}" class="show-table-content"></td>
+                        <td th:text="${movie.actors}" class="show-table-content"></td>
+                        <td th:text="${movie.country}" class="show-table-content"></td>
+                        <td th:text="${movie.duration} + ' мин.'" class="show-table-content"></td>
+                        <td th:text="${#strings.length(movie.description) > 50 ? movie.description.substring(0, 50) + '...' : movie.description}" class="show-table-content"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="btns-content" style="display: flex; gap: 15px;">
+                                <h4 style="font-weight: bold">Действия: </h4>
+                                <a th:href="'/edit/movie/' + ${movie.id}">
+                                    <img src="/assets/icons/Edit.svg" alt="">
+                                </a>
+                                <form th:action="'/remove/movie/' + ${movie.id}" method="post">
+                                    <button type="submit" class="btn-icon">
+                                        <img src="/assets/icons/Delete.svg" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
                 </div>
-            </div>
+
+            </table>
         </div>
     </section>
     <section class="redact_film">

@@ -26,20 +26,14 @@ public class ScheduleController {
     public String schedule(Model model) {
         List<LocalDate> availableDates = scheduleService.getAvailableDates();
         model.addAttribute("availableDates", availableDates);
-
         if (!availableDates.isEmpty()) {
             LocalDate firstDate = availableDates.get(0);
             model.addAttribute("selectedDate", firstDate);
-
-            // Группируем сеансы по фильмам
-            Map<Movie, List<Show>> showsGroupedByMovie = scheduleService.getShowsByDate(firstDate).stream()
-                    .collect(Collectors.groupingBy(Show::getMovie));
-            model.addAttribute("showsGroupedByMovie", showsGroupedByMovie);
+            model.addAttribute("showsGroupedByMovie", scheduleService.getShowsGroupedByMovie(firstDate));
         } else {
             model.addAttribute("selectedDate", null);
             model.addAttribute("showsGroupedByMovie", Map.of());
         }
-
         return "schedule";
     }
 
@@ -47,13 +41,7 @@ public class ScheduleController {
     public String getShowsByDate(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             Model model) {
-        Map<Movie, List<Show>> showsGroupedByMovie = scheduleService.getShowsByDate(date).stream()
-                .collect(Collectors.groupingBy(Show::getMovie,
-                        Collectors.collectingAndThen(Collectors.toList(),
-                                list -> list.stream()
-                                        .sorted(Comparator.comparing(Show::getTime))
-                                        .collect(Collectors.toList()))));
-        model.addAttribute("showsGroupedByMovie", showsGroupedByMovie);
+        model.addAttribute("showsGroupedByMovie", scheduleService.getShowsGroupedByMovie(date));
         return "components/fragments/showsFragment :: showsFragment";
     }
 

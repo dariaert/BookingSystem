@@ -6,6 +6,7 @@ import com.projects.ticketsystem.models.Show;
 import com.projects.ticketsystem.repositories.MovieRepository;
 import com.projects.ticketsystem.repositories.SeatRepository;
 import com.projects.ticketsystem.repositories.ShowRepository;
+import com.projects.ticketsystem.services.ShowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,9 @@ public class ShowController {
     private final ShowRepository showRepository;
     private final MovieRepository movieRepository;
     private final SeatRepository seatRepository;
+    private final ShowService showService;
 
-    @GetMapping("/redact/show/{id}")
+    @GetMapping("/edit/show/{id}")
     public String showDetails(@PathVariable(value = "id") long showId, Model model) {
         Iterable<Movie> movies = movieRepository.findAll();
         Optional<Show> show = showRepository.findById(showId);
@@ -68,12 +70,11 @@ public class ShowController {
 
     @PostMapping("/remove/show/{id}")
     public String adminShowRemove(@PathVariable(value = "id") long showId, Model model) {
-        Show show = showRepository.findById(showId).orElseThrow();
-        showRepository.delete(show);
+        showService.removeShow(showId);
         return "redirect:/admin";
     }
 
-    @PostMapping("/redact/show/{id}")
+    @PostMapping("/edit/show/{id}")
     public String adminShowRedact(@PathVariable(value = "id") long showId,
                                    @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                    @RequestParam("movieId") Long movieId, // Получаем id фильма

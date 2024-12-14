@@ -3,6 +3,8 @@ package com.projects.ticketsystem.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "seat_table")
@@ -25,5 +27,8 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "show_id")
     private Show show;
+
+    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PartReservation> partReservations;
 
 }

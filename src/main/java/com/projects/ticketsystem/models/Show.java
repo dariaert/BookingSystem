@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,6 +27,13 @@ public class Show {
 
     @Column(name = "show_time")
     private LocalTime time;
+
+    // Добавляем связь с Seat и каскадное удаление
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seat> seats;
+
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reservation> reservation;
 
     public Show(Movie movie, int cost, LocalDate date, LocalTime time) {
         this.movie = movie;

@@ -1,35 +1,30 @@
 package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.Movie;
-import com.projects.ticketsystem.repositories.MovieRepository;
+import com.projects.ticketsystem.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
     @GetMapping("/")
     public String home(Model model) {
-        Iterable<Movie> movies = movieRepository.findAll();
+        Iterable<Movie> movies = movieService.getAllMovies();
         model.addAttribute("movies", movies);
         return "home";
     }
 
     @GetMapping("/movie/{id}")
     public String movieDetails(@PathVariable(value = "id") long movieId, Model model) {
-        Optional<Movie> movie = movieRepository.findById(movieId);
-        ArrayList<Movie> arrayList = new ArrayList<>();
-        movie.ifPresent(arrayList::add);
-        model.addAttribute("movie", arrayList);
+        Movie movie = movieService.getMovieById(movieId);
+        model.addAttribute("movie", movie);
         return "item";
     }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,5 +29,8 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "show_id")
     private Show show;
+
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PartReservation> partReservations;
 
 }

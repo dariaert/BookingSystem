@@ -1,9 +1,8 @@
 package com.projects.ticketsystem.controllers;
 
 import com.projects.ticketsystem.models.Genre;
-import com.projects.ticketsystem.repositories.GenreRepository;
+import com.projects.ticketsystem.services.GenreService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,43 +10,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 @Controller
 @RequiredArgsConstructor
 public class GenreController {
 
-    private final GenreRepository genreRepository;
+    private final GenreService genreService;
 
-    @GetMapping("/redact/genre/{id}")
+    @GetMapping("/edit/genre/{id}")
     public String genreDetails(@PathVariable(value = "id") long genreId, Model model) {
-        Optional<Genre> genre = genreRepository.findById(genreId);
-        ArrayList<Genre> arrayList = new ArrayList<>();
-        genre.ifPresent(arrayList::add);
-        model.addAttribute("genres", arrayList);
+        Genre genre = genreService.getGenreById(genreId);
+        model.addAttribute("genre", genre);
         return "admin/actions/genre-redact";
     }
 
     @PostMapping("/genre/add")
-    public String adminGenreAdd(@RequestParam("name_genre") String nameGenre, Model model) {
-        Genre genre = new Genre(nameGenre);
-        genreRepository.save(genre);
+    public String adminGenreAdd(@RequestParam("name_genre") String nameGenre) {
+        genreService.addGenre(nameGenre);
         return "redirect:/admin";
     }
 
-    @PostMapping("/redact/genre/{id}")
+    @PostMapping("/edit/genre/{id}")
     public String adminGenreRedact(@PathVariable(value = "id") long genreId, @RequestParam("name_genre") String nameGenre, Model model) {
-        Genre genre = genreRepository.findById(genreId).orElseThrow();
-        genre.setGenreName(nameGenre);
-        genreRepository.save(genre);
+        genreService.updateGenre(genreId, nameGenre);
         return "redirect:/admin";
     }
 
     @PostMapping("/remove/genre/{id}")
     public String adminGenreRemove(@PathVariable(value = "id") long genreId, Model model) {
-        Genre genre = genreRepository.findById(genreId).orElseThrow();
-        genreRepository.delete(genre);
+        genreService.removeGenre(genreId);
         return "redirect:/admin";
     }
 

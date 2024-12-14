@@ -301,7 +301,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     height: 470px;
     border-radius: 15px;
 }
-.ageLimit{
+.ageLimit {
     position: absolute;
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.40);
@@ -315,7 +315,14 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     z-index: 2;
     margin: 10px 10px;
 }
-
+.ageLimit-admin{
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.40);
+    border: 1px solid #070707;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 9px 11px 9px 11px;
+}
 .poster-after-hover{
     position: absolute;
     z-index: 2;
@@ -586,12 +593,11 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .show-table-content{
-    padding-right: 25px;
+    padding-right: 10px;
 }
-
 .poster-img{
-    width: 99px;
-    height: 148px;
+    width: 90px;
+    height: auto;
     border-radius: 15px;
 }
 

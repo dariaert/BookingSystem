@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,6 +26,16 @@ public class ScheduleService {
 
     public List<LocalDate> getAvailableDates() {
         return showRepository.findAllDistinctDates();
+    }
+
+    public Map<Movie, List<Show>> getShowsGroupedByMovie(LocalDate date) {
+        return getShowsByDate(date).stream()
+                .collect(Collectors.groupingBy(Show::getMovie,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream()
+                                        .sorted(Comparator.comparing(Show::getTime))
+                                        .collect(Collectors.toList()))));
     }
 
 }
